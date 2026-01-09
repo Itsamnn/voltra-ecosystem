@@ -130,7 +130,7 @@ This project is divided into four specialized components. Click the links below 
 - **Role**: The brain
 - **Function**: NILM inference, appliance analytics, and AI advisory system
 - **Key Feature**: Advanced energy disaggregation with intelligent recommendations
-- **Technology**: Python FastAPI with machine learning algorithms
+- **Technology**: Python FastAPI with Gemini AI Agent-powered NILM algorithms
 
 ### 3. ⚙️ Orchestration: Voltra-n8n
 
