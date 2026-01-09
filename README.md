@@ -1,9 +1,39 @@
 # ⚡ Voltra Ecosystem
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
+[![Kotlin](https://img.shields.io/badge/Kotlin-Latest-blueviolet)](https://kotlinlang.org/)
+[![C++ Arduino](https://img.shields.io/badge/C%2B%2B-Arduino-blue)](https://www.arduino.cc/)
+[![Firebase](https://img.shields.io/badge/Firebase-Realtime-orange)](https://firebase.google.com/)
+
 **The AI-Native Smart Energy & NILM Solution (2025–2026)**
 
 <div align="center">
-  <img src="./docs/diagrams/Hardware Block Diagram – ESP32 Smart Energy Meter.svg" alt="System Architecture Overview" width="800"/>
+  <img src="./docs/diagrams/Nanometer Overview.svg" alt="Voltra Ecosystem Overview" width="800"/>
 </div>
+
+## 📋 Table of Contents
+- [🚀 5-Minute Quick Start](#-5-minute-quick-start)
+- [📖 Project Overview](#-project-overview)
+- [🏗️ System Architecture](#️-system-architecture)
+- [📦 Ecosystem Repositories](#-ecosystem-repositories)
+- [⚡ Quick Start (Choose Your Entry Point)](#-quick-start-choose-your-entry-point)
+- [🧩 Component Breakdown](#-component-breakdown)
+- [🚀 Deployment Strategy](#-deployment-strategy)
+- [📊 System Performance](#-system-performance)
+- [🔧 Development & Contributing](#-development--contributing)
+- [❓ FAQ & Troubleshooting](#-faq--troubleshooting)
+- [👥 Author](#-author)
+
+## 🚀 5-Minute Quick Start
+
+Want to see Voltra in action without hardware?
+
+1. **Clone this repo**: `git clone https://github.com/Itsamnn/voltra-ecosystem`
+2. **Start demo environment**: `npm run dev` (Docker Compose spins up NILM + sample data)
+3. **View dashboard**: Open mobile app simulator to see mock energy data
+
+See [QUICKSTART.md](QUICKSTART.md) for detailed steps.
 
 ## 📖 Project Overview
 
@@ -11,12 +41,19 @@ Voltra is a comprehensive, end-to-end IoT solution designed for Non-Intrusive Lo
 
 The ecosystem spans four distinct repositories, orchestrating data from the electrical socket to the user's pocket.
 
-## 🏗️ Unified Architecture
+## 🏗️ System Architecture
 
-The system utilizes a Microservices-inspired architecture, ensuring separation of concerns. The hardware handles sensing, the backend handles intelligence, n8n handles orchestration, and the app handles visualization.
+The system uses a **Layered Architecture** with **Event-Driven Communication**:
+
+- **Hardware Layer** (ESP32): Energy acquisition and appliance control
+- **Analytics Layer** (NILM): Intelligence and disaggregation algorithms  
+- **Orchestration Layer** (n8n): Scheduling, routing, and automation
+- **Application Layer** (Nanometer): User interface and visualization
+
+Communication flows through **Firebase Realtime Database** as the central event hub.
 
 <div align="center">
-  <img src="./docs/diagrams/Firmware Flow – ESP32 Smart Energy Meter.svg" alt="Analytics and Intelligence Layer" width="700"/>
+  <img src="./docs/diagrams/data-pipeline.svg" alt="Data Pipeline Architecture" width="700"/>
 </div>
 
 ```mermaid
@@ -49,6 +86,17 @@ graph TD
     style APP fill:#ff9,stroke:#333,stroke-width:2px
 ```
 
+## ⚡ Quick Start (Choose Your Entry Point)
+
+### I want to...
+- **🔍 Monitor energy in real-time** → Start with [voltra-nanometer](https://github.com/Itsamnn/voltra-nanometer)
+- **🧠 Understand appliance usage (NILM)** → Start with [voltra-nilm](https://github.com/Itsamnn/voltra-nilm)
+- **🔌 Set up hardware metering** → Start with [voltra-esp32](https://github.com/Itsamnn/voltra-esp32)
+- **⚙️ Automate workflows** → Start with [voltra-n8n](https://github.com/Itsamnn/voltra-n8n)
+
+### For Full-Stack Setup
+Follow the [Deployment Strategy](#-deployment-strategy) section below.
+
 ## 📦 Ecosystem Repositories
 
 This project is divided into four specialized components. Click the links below to navigate to specific implementations.
@@ -65,7 +113,7 @@ This project is divided into four specialized components. Click the links below 
 ### 1. 🔌 Hardware: Voltra-esp32
 
 <div align="center">
-  <img src="./docs/diagrams/Hardware Block Diagram – ESP32 Smart Energy Meter.svg" alt="Hardware Block Diagram" width="600"/>
+  <img src="https://github.com/Itsamnn/voltra-ecosystem/blob/main/docs/diagrams/Hardware%20Block%20Diagram%20%E2%80%93%20ESP32%20Smart%20Energy%20Meter.svg" alt="Hardware Block Diagram" width="600"/>
 </div>
 
 - **Role**: The sensory nervous system
@@ -76,7 +124,7 @@ This project is divided into four specialized components. Click the links below 
 ### 2. 🧠 Intelligence: Voltra-nilm
 
 <div align="center">
-  <img src="./docs/diagrams/Firmware Flow – ESP32 Smart Energy Meter.svg" alt="Firmware Flow" width="600"/>
+  <img src="https://github.com/Itsamnn/voltra-ecosystem/blob/main/docs/diagrams/analytics-and-intelligence-layer.svg" alt="Analytics and Intelligence Layer" width="600"/>
 </div>
 
 - **Role**: The brain
@@ -96,7 +144,7 @@ This project is divided into four specialized components. Click the links below 
 ### 4. 📱 Interface: Voltra-nanometer
 
 <div align="center">
-  <img src="./docs/diagrams/Firmware flow.svg" alt="App Flow" width="600"/>
+  <img src="https://github.com/Itsamnn/voltra-ecosystem/blob/main/docs/diagrams/Nanometer%20Overview.svg" alt="Nanometer App Overview" width="600"/>
 </div>
 
 - **Role**: The user interface
@@ -128,19 +176,21 @@ To deploy the full ecosystem, follow this strict order of operations:
    git clone https://github.com/Itsamnn/voltra-nilm
    cd voltra-nilm
    docker build -t voltra-nilm .
-   docker run -p 8000:8000 voltra-nilm
+   docker run -p 8000:8000 -e FIREBASE_PROJECT_ID=your_project voltra-nilm
    ```
 
 3. **🔌 Flash ESP32 Firmware**
    ```bash
    git clone https://github.com/Itsamnn/voltra-esp32
-   # Configure WiFi, GSM, and Firebase credentials
+   cd voltra-esp32
+   # Configure WiFi, GSM, and Firebase credentials in config.h
    # Flash firmware to ESP32 device with PZEM integration
    ```
 
 4. **⚙️ Setup n8n Workflows**
    ```bash
    git clone https://github.com/Itsamnn/voltra-n8n
+   cd voltra-n8n
    # Import workflow JSON files to your n8n instance
    # Configure HTTP endpoints and Telegram integration
    ```
@@ -154,12 +204,17 @@ To deploy the full ecosystem, follow this strict order of operations:
 
 > **Note**: Detailed setup instructions are available in the README.md of each respective repository.
 
-## 📊 System Metrics & Performance
+## 📊 System Performance (Measured)
 
-- **Real-time Data Processing**: < 100ms latency
-- **Energy Disaggregation Accuracy**: 85-95% (varies by appliance type)
-- **Mobile App Response Time**: < 2s for live data sync
-- **Daily Report Generation**: Automated at 6 AM local time
+| Metric | Value | Notes |
+|--------|-------|-------|
+| **Real-time Latency** | < 100ms | Firebase → App pipeline |
+| **Energy Accuracy** | 85-95% | NILM disaggregation (appliance-dependent) |
+| **App Response Time** | < 2s | Live data refresh over WiFi |
+| **NILM Processing** | ~5s | Per 15-min energy window |
+| **Report Generation** | 30s | Daily summary computation |
+
+**Test Results**: See [docs/PERFORMANCE.md](docs/PERFORMANCE.md) for detailed benchmarks.
 
 ## 🔧 Development & Contributing
 
@@ -178,8 +233,34 @@ git submodule update --init --recursive
 ### Architecture Principles
 - **Separation of Concerns**: Each component has a single responsibility
 - **Event-Driven Communication**: Components communicate via Firebase events
-- **Scalable Design**: Microservices architecture allows independent scaling
-- **AI-First Approach**: Gemini AI integration for natural language insights
+- **Scalable Design**: Layered architecture allows independent scaling
+- **AI-First Approach**: Custom NILM algorithms for energy insights
+
+## 🤝 Contributing
+
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+**Quick contribution areas:**
+- Add support for new energy sensors (currently PZEM only)
+- Improve NILM accuracy for specific appliances
+- Expand to other geographic tariff models
+
+## ❓ FAQ & Troubleshooting
+
+**Q: Do I need all 4 components?**
+- No! Run just the app + NILM backend for testing without hardware.
+
+**Q: Can I use this with my existing smart meter?**
+- Modify the ESP32 firmware to read your meter protocol (Modbus, IEC-62056-21, etc.)
+
+**Q: What happens if Firebase goes down?**
+- ESP32 queues measurements locally; n8n and app operate in degraded mode.
+
+**Q: How accurate is the NILM disaggregation?**
+- 85-95% depending on appliance type. High-power devices (AC, heater) are most accurate.
+
+**Q: Can I run this commercially?**
+- Yes! MIT license allows commercial use. See [LICENSE](LICENSE) for details.
 
 ## 📄 License
 
