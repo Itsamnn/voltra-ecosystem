@@ -251,13 +251,13 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 - No! Run just the app + NILM backend for testing without hardware.
 
 **Q: Can I use this with my existing smart meter?**
-- Modify the ESP32 firmware to read your meter protocol (Modbus, IEC-62056-21, etc.)
+- Yes. Modify the ESP32 firmware to read your meter protocol (Modbus, IEC-62056-21, etc.). See [voltra-esp32 README](https://github.com/Itsamnn/voltra-esp32#hardware-requirements) for sensor integration guide.
 
 **Q: What happens if Firebase goes down?**
-- ESP32 queues measurements locally; n8n and app operate in degraded mode.
+- Firebase is required for real-time sync. GSM provides command fallback but not data queueing. For offline resilience, implement local SPIFFS storage in ESP32 firmware (advanced feature).
 
 **Q: How accurate is the NILM disaggregation?**
-- 85-95% depending on appliance type. High-power devices (AC, heater) are most accurate.
+- Estimated 85-95% depending on appliance type (industry standard for NILM). High-power devices (AC, heaters) are most accurate. Detailed test results available in [docs/PERFORMANCE.md](docs/PERFORMANCE.md).
 
 **Q: Can I run this commercially?**
 - Yes! MIT license allows commercial use. See [LICENSE](LICENSE) for details.
