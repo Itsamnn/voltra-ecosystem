@@ -103,10 +103,10 @@ This project is divided into four specialized components. Click the links below 
 
 | Component | Repository Name | Tech Stack | Status | Link |
 |-----------|----------------|------------|--------|------|
-| 🔌 **Hardware** | Voltra-esp32 | C++ Arduino, PZEM, GSM | 🔒 Private | [View Repo](https://github.com/Itsamnn/voltra-esp32) |
-| 🧠 **Intelligence** | Voltra-nilm | Python FastAPI, NILM, AI | 🔒 Private | [View Repo](https://github.com/Itsamnn/voltra-nilm) |
-| ⚙️ **Orchestration** | Voltra-n8n | n8n Workflows, Telegram | 🔒 Private | [View Repo](https://github.com/Itsamnn/voltra-n8n) |
-| 📱 **Mobile App** | Voltra-nanometer | Kotlin Android, Dashboard | 🔒 Private | [View Repo](https://github.com/Itsamnn/voltra-nanometer) |
+| 🔌 **Hardware** | Voltra-esp32 | C++ Arduino, PZEM, GSM | 📖 Public | [View Repo](https://github.com/Itsamnn/voltra-esp32) |
+| 🧠 **Intelligence** | Voltra-nilm | Python FastAPI, NILM, AI | 📖 Public | [View Repo](https://github.com/Itsamnn/voltra-nilm) |
+| ⚙️ **Orchestration** | Voltra-n8n | n8n Workflows, Telegram | 📖 Public | [View Repo](https://github.com/Itsamnn/voltra-n8n) |
+| 📱 **Mobile App** | Voltra-nanometer | Kotlin Android, Dashboard | 📖 Public | [View Repo](https://github.com/Itsamnn/voltra-nanometer) |
 
 ## 🧩 Component Breakdown
 
