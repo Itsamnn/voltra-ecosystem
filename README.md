@@ -9,7 +9,7 @@
 **The AI-Native Smart Energy & NILM Solution (2025–2026)**
 
 <div align="center">
-  <img src="./docs/diagrams/Nanometer Overview.svg" alt="Voltra Ecosystem Overview" width="800"/>
+  <img src="./docs/diagrams/System Architecture – Overview.svg" alt="Voltra System Architecture" width="900"/>
 </div>
 
 ## 📋 Table of Contents
