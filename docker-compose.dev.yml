@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  # NILM Backend Service
+  voltra-nilm:
+    build:
+      context: ./components/voltra-nilm
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+      - ENVIRONMENT=development
+    volumes:
+      - ./components/voltra-nilm:/app
+      - ./serviceAccount.json:/app/serviceAccount.json:ro
+    depends_on:
+      - redis
+    networks:
+      - voltra-network
+
+  # Redis for caching
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - voltra-network
+
+  # Firebase Emulator (for development)
+  firebase-emulator:
+    image: node:18-alpine
+    working_dir: /app
+    command: >
+      sh -c "npm install -g firebase-tools &&
+             firebase emulators:start --only database --project demo-project"
+    ports:
+      - "9000:9000"  # Firebase UI
+      - "9001:9001"  # Realtime Database
+    volumes:
+      - ./firebase.json:/app/firebase.json:ro
+      - ./database.rules.json:/app/database.rules.json:ro
+    networks:
+      - voltra-network
+
+  # Documentation Server
+  docs:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./docs:/usr/share/nginx/html:ro
+    networks:
+      - voltra-network
+
+  # n8n Development Instance
+  n8n:
+    image: n8nio/n8n:latest
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=password
+      - WEBHOOK_URL=http://localhost:5678/
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./components/voltra-n8n/workflows:/home/node/.n8n/workflows:ro
+    networks:
+      - voltra-network
+
+volumes:
+  redis_data:
+  n8n_data:
+
+networks:
+  voltra-network:
+    driver: bridge

@@ -1,0 +1,10 @@
+# Diagrams Directory
+
+This directory contains all system architecture diagrams and visual documentation for the Voltra ecosystem.
+
+## Files:
+- `System Architecture – Overview.svg` - High-level system overview
+- `Hardware Block Diagram – ESP32 Smart Energy Meter.svg` - Hardware component diagram
+- `Firmware Flow – ESP32 Smart Energy Meter.svg` - Firmware execution flow
+- `Firmware flow.svg` - General firmware flow
+- `analytics-and-intelligence-layer.svg` - AI and analytics layer diagram

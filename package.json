@@ -1,0 +1,37 @@
+{
+  "name": "voltra-ecosystem",
+  "version": "1.0.0",
+  "description": "The AI-Native Smart Energy & NILM Solution - Umbrella Repository",
+  "main": "index.js",
+  "scripts": {
+    "setup": "git submodule update --init --recursive",
+    "dev": "docker-compose -f docker-compose.dev.yml up",
+    "test": "npm run test:backend && npm run test:integration",
+    "test:backend": "cd components/voltra-nilm && python -m pytest tests/",
+    "test:integration": "./scripts/test-integration.sh",
+    "docs:serve": "cd docs && python -m http.server 8080",
+    "clean": "docker-compose down && docker system prune -f"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Itsamnn/voltra-ecosystem.git"
+  },
+  "keywords": [
+    "iot",
+    "nilm",
+    "energy-monitoring",
+    "esp32",
+    "ai",
+    "smart-home",
+    "energy-disaggregation"
+  ],
+  "author": "Aman Patel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Itsamnn/voltra-ecosystem/issues"
+  },
+  "homepage": "https://github.com/Itsamnn/voltra-ecosystem#readme",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
