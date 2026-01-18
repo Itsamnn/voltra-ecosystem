@@ -29,6 +29,8 @@
 
 Want to see Voltra in action without hardware?
 
+**[Watch Demo Video](https://youtu.be/PBjG3P48qM4)** - See Voltra in action (5-minute walkthrough)
+
 1. **Clone this repo**: `git clone https://github.com/Itsamnn/voltra-ecosystem`
 2. **Start demo environment**: `npm run dev` (Docker Compose spins up NILM + sample data)
 3. **View dashboard**: Open mobile app simulator to see mock energy data
